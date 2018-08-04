@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2018/07/15/test/" itemprop="url">test</a></h1>
+                <a class="post-title-link" href="/blog/2018/07/15/test/" itemprop="url">CouchDB</a></h1>
         
 
         <div class="post-meta">
@@ -303,7 +303,12 @@
       
         
           
-            
+            <p>最近在專案中用到了NoSql DB來存資料，就來記錄一下使用CouchDB的心得<br>首先，為何會想使用NoSql DB，而不使用叫熟悉的SQL DB<br>是因為此專案需要儲存情資(文章)數據<br>那文章數據主要包含了:<br>1.文章內容<br>2.文章回覆<br>3.許多繁雜的欄位<br>如果以傳統的SQL來儲存，需要文章、回覆、文章和回覆關係表總共三個表格，<br>在query時，就需要join三張表格，這樣一來效率很差，<br>另外如果要改動欄位，勢必要改動schema，那勢必也是一件麻煩的事情。<br>如果用CouchDB，只需要一個document就能存放文章、回覆、和其他欄位資訊，<br>針對query的部分，更是可以用document的id取出相關資料<br>針對欄位的部分，因為document裡的資料都是json格式，所以當新增欄位時，只需要新增key就行<br>至於操作CouchDB，可以使用curl的方式對資源對CURD的存取</p>
+<h3 id="Get-db"><a href="#Get-db" class="headerlink" title="Get db"></a>Get db</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET http://127.0.0.1:5984/&#123;db_name&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Get-item-by-id"><a href="#Get-item-by-id" class="headerlink" title="Get item by id"></a>Get item by id</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET http://127.0.0.1:5984/&#123;db_name&#125;/&#123;item_id&#125;</span><br></pre></td></tr></table></figure>
+<p>ref: <a href="http://docs.couchdb.org/en/stable/intro/curl.html" target="_blank" rel="noopener">http://docs.couchdb.org/en/stable/intro/curl.html</a></p>
+<p>如果大家想用docker build環境的話，可以參考我github上的docker-compose<br>ref: <a href="https://github.com/chouwenhan/docker/tree/master/db" target="_blank" rel="noopener">https://github.com/chouwenhan/docker/tree/master/db</a></p>
+
           
         
       
